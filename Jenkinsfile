@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f my-web || true
-                    docker run -d -p 8081:80 --name my-web $DOCKER_IMAGE
+                    docker run -d -p 8080:80 --name my-web $DOCKER_IMAGE
                 '''
             }
         }
