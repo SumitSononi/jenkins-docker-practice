@@ -4,12 +4,13 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'my-first-web:1.0'
+        DOCKER_HOST = 'tcp://docker:2375'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code checked out'
+                echo 'Source code checked out from GitHub'
             }
         }
 
