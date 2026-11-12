@@ -1,16 +1,14 @@
-
 pipeline {
     agent any
 
     environment {
         DOCKER_IMAGE = 'my-first-web:1.0'
-       
     }
 
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code checked out from GitHub'
+                echo 'Source code checked out'
             }
         }
 
