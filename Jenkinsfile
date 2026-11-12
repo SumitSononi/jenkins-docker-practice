@@ -1,28 +1,36 @@
+
 pipeline {
     agent any
+
+    environment {
+        DOCKER_IMAGE = 'my-first-web:1.0'
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                echo 'GitHub repository connected!'
+                echo 'Source code checked out'
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building application - Webhook test successful!'
+                sh 'docker build -t $DOCKER_IMAGE .'
             }
         }
 
-        stage('Test') {
+        stage('Verify Docker Image') {
             steps {
-                echo 'Testing application'
+                sh 'docker images'
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy Container') {
             steps {
-                echo 'Deploying application'
+                sh '''
+                    docker rm -f my-web || true
+                    docker run -d -p 8081:80 --name my-web $DOCKER_IMAGE
+                '''
             }
         }
     }
